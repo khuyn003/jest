@@ -29,10 +29,10 @@ export default (
     }).catch(e => {
       const message = formatExecError(e, configs[0], {noStackTrace: true})
         .split('\n')
-        .filter(line => !line || !line.includes('Command failed:'))
-        .join('\n');
+        .filter(line => !!line && !line.includes('Command failed:'))
+        .join('\n\n');
 
-      console.error(chalk.red(`\n\n${message}`));
+      console.error(chalk.red(`\n\n${message}\n`));
 
       process.exit(1);
 
